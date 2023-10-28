@@ -1,0 +1,4 @@
+backend/tmp/
+.env
+.env.example
+frontend/node_module
