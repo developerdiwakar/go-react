@@ -32,10 +32,10 @@ services:
       MYSQL_DATABASE: "gofiber_react_app"
       MYSQL_USER: "gofiber_react"
       MYSQL_PASSWORD: "VyLg8R6BzS5KVwMcDK"
-      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_ROOT_PASSWORD: "6MpU5tQaVXvBFqSLDFN25v9zzgRbcvDK"
     ports:
-      - "53309:3309"
+      - "53309:3306"
     volumes:
       - goreact-mysql_data:/var/lib/mysql
   
