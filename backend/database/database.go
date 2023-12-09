@@ -4,18 +4,39 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"sync"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
 )
 
-type Db struct {
+type Database struct {
 	DB *gorm.DB
 }
 
+var db *Database
+
+var once sync.Once
+
+// Create New databse connection
+func Conn() *Database {
+	// Load the database
+	dbconn := Load()
+	// Ensure to create a single instance
+	once.Do(func() {
+		db = dbconn
+	})
+	return db
+}
+
 // Connect and load the database
-func Load() *Db {
+func Load() *Database {
+	// Return existing datbase connection if exists
+	if db != nil {
+		return db
+	}
+	// Open New database connection
 	MYSQL_USER := os.Getenv("MYSQL_USER")
 	MYSQL_PASS := os.Getenv("MYSQL_PASS")
 	MYSQL_HOST := os.Getenv("MYSQL_HOST")
@@ -40,16 +61,18 @@ func Load() *Db {
 			TablePrefix: "golist_",
 		},
 	})
+
 	if err != nil {
 		log.Fatalln("Failed to connect database", err)
 	}
 	log.Println("Successfully connected to database")
-	return &Db{DB: dbConn}
+
+	return &Database{DB: dbConn}
 }
 
 // Close the database connection
-func (d *Db) Close() {
-	mysqlDB, err := d.DB.DB()
+func Close() {
+	mysqlDB, err := Conn().DB.DB()
 	if err != nil {
 		log.Fatalln("Database closing error", err)
 	}

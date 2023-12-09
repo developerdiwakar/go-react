@@ -26,9 +26,9 @@ func main() {
 	})
 
 	// Load the Database
-	db := database.Load()
-	defer db.Close()
 
+	db := database.Conn()
+	defer database.Close()
 	// Called Migrations
 	migrations.Migrate(db.DB)
 	// Called Middlewares

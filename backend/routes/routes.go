@@ -1,6 +1,10 @@
 package routes
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"gofiber-api/controllers"
+
+	"github.com/gofiber/fiber/v2"
+)
 
 func Load(app *fiber.App) {
 	// Routes
@@ -9,4 +13,8 @@ func Load(app *fiber.App) {
 			"title": "Gofiber with React App",
 		})
 	})
+	// Creating API group for API routes
+	api := app.Group("api")
+	// Auth Routes
+	api.Post("register", controllers.Register)
 }
