@@ -2,9 +2,9 @@ package controllers
 
 import (
 	"gofiber-api/database"
-	"gofiber-api/managers"
 	"gofiber-api/models"
-	"gofiber-api/structs"
+	"gofiber-api/requests"
+	"gofiber-api/services"
 	"gofiber-api/validators"
 	"log"
 
@@ -13,8 +13,8 @@ import (
 
 func Register(c *fiber.Ctx) error {
 
-	requestBody := &structs.UserRegister{}
-	response := managers.GetBaseResponseObject()
+	requestBody := &requests.UserRegister{}
+	response := services.GetBaseResponseObject()
 
 	if err := c.BodyParser(requestBody); err != nil {
 		response["errors"] = err
@@ -35,10 +35,8 @@ func Register(c *fiber.Ctx) error {
 			MobileNumber: requestBody.MobileNumber,
 			Password:     requestBody.Password,
 		})
-		log.Println(userCreated)
 		if err := userCreated.Error; err != nil {
-			log.Println(err)
-			response["errors"] = err
+			response["errors"] = validators.GetSQLError(err)
 			response["message"] = "Registration Failed"
 			return c.Status(fiber.StatusForbidden).JSON(response)
 		}
