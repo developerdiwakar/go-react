@@ -1,6 +1,7 @@
 package validators
 
 import (
+	"encoding/json"
 	"log"
 
 	"github.com/go-playground/validator/v10"
@@ -15,11 +16,21 @@ type ErrorResponse struct {
 	Param       string      `json:"param"`
 }
 
+// Define SQL error
+type SQLError struct {
+	Number   int
+	SQLState []int8
+	Message  string
+}
+
 // Create a validator object
 var validate = validator.New()
 
 // Package Initialization
-func init() {}
+func init() {
+	// Register Custom Validation rules
+	validate.RegisterValidation("unique", IsUnique)
+}
 
 // Create a function that validates post body and return error if there are any
 func ValidateStruct(postBody interface{}) []*ErrorResponse {
@@ -44,4 +55,23 @@ func handleErrors(err error) []*ErrorResponse {
 		}
 	}
 	return errors
+}
+
+func GetSQLError(err error) *SQLError {
+	var errByte []byte
+	errByte, err1 := json.Marshal(err)
+	if err1 != nil {
+		log.Fatalln(err)
+	}
+	log.Println("SQLError: ", string(errByte))
+	var sqlErr *SQLError
+	json.Unmarshal(errByte, &sqlErr)
+	sqlErr.Message = GetSqlErrMsg(sqlErr.Number, sqlErr.Message)
+	return sqlErr
+}
+
+// TODO: Validation rule to check whether the target value is unique or not
+func IsUnique(data validator.FieldLevel) bool {
+
+	// targetValue := data.Field().String()
 }

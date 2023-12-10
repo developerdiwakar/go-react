@@ -1,4 +1,4 @@
-package managers
+package services
 
 func GetBaseResponseObject() map[string]interface{} {
 	response := make(map[string]interface{})

@@ -2,7 +2,6 @@ package validators
 
 import (
 	"fmt"
-	"log"
 )
 
 var ruleMessages = map[string]string{
@@ -15,7 +14,6 @@ var ruleMessages = map[string]string{
 }
 
 func GetErrMsg(tag, field string, value interface{}, param string) string {
-	log.Println(value, param)
 	if param != "" {
 		if field == "ConfirmPassword" {
 			return fmt.Sprintf(ruleMessages[field], field, param)
