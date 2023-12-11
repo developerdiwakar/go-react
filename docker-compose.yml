@@ -20,3 +20,24 @@ services:
       - "8000:8000"
     volumes:
       - ./backend:/app 
+
+  mysql:
+    image: mysql:latest
+    container_name: goreact-mysql
+    restart: on-failure
+    # cpus: "1.0"
+    # mem_limit: "1g"
+    environment:
+      MYSQL_HOST: "localhost"
+      MYSQL_DATABASE: "gofiber_react_app"
+      MYSQL_USER: "gofiber_react"
+      MYSQL_PASSWORD: "VyLg8R6BzS5KVwMcDK"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_ROOT_PASSWORD: "6MpU5tQaVXvBFqSLDFN25v9zzgRbcvDK"
+    ports:
+      - "53309:3306"
+    volumes:
+      - goreact-mysql_data:/var/lib/mysql
+  
+volumes:
+  goreact-mysql_data:

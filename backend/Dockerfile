@@ -7,16 +7,9 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY ./ ./
 
-# Download dependencies
+# Manage dependencies
 RUN go mod tidy \
     && go mod verify
-
-# Build the Go application
-# RUN go build -o main
-
-
-# Run the GoFiber backend application
-# CMD ["./main"]
 
 # Make port 8000 available to the world outside this container
 EXPOSE 8000
