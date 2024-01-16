@@ -2,6 +2,7 @@ package routes
 
 import (
 	"gofiber-api/controllers"
+	"gofiber-api/http/middlewares"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -13,8 +14,10 @@ func Load(app *fiber.App) {
 			"title": "Gofiber with React App",
 		})
 	})
-	// Creating API group for API routes
-	api := app.Group("api")
 	// Auth Routes
-	api.Post("register", controllers.Register)
+	app.Post("/register", controllers.Register)
+	app.Post("/login", controllers.Login)
+	// Creating API group for Authenticated API routes
+	api := app.Group("api", middlewares.JWTAuthMiddleware)
+	api.Get("user", controllers.GetUserInfo)
 }

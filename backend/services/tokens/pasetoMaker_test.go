@@ -23,7 +23,7 @@ func TestPasetoMaker(t *testing.T) {
 	require.NoError(t, err)
 	require.NotEmpty(t, token)
 
-	payload, err := maker.Verifytoken(token)
+	payload, err := maker.VerifyToken(token)
 	require.NoError(t, err)
 	require.NotEmpty(t, payload)
 
@@ -42,7 +42,7 @@ func TestExpiredPasetoToken(t *testing.T) {
 	require.NoError(t, err)
 	require.NotEmpty(t, token)
 
-	payload, err := maker.Verifytoken(token)
+	payload, err := maker.VerifyToken(token)
 	require.Error(t, err)
 	require.ErrorContains(t, err, ErrExpiredToken.Error())
 	require.Nil(t, payload)

@@ -7,5 +7,5 @@ type Maker interface {
 	// CreateToken create a new token for a specific userid and duration
 	CreateToken(userId int, duration time.Duration) (string, error)
 	// VerifyToken verify if the token is valid or not
-	Verifytoken(token string) (*Payload, error)
+	VerifyToken(token string) (*Payload, error)
 }
