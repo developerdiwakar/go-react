@@ -96,3 +96,7 @@ func IsUniqueRule(data validator.FieldLevel) bool {
 	database.Conn().DB.Raw(sqlQuery).Scan(&result)
 	return result == nil
 }
+
+func GetGeneralError(err error) []map[string]string {
+	return []map[string]string{{"message": err.Error()}}
+}
