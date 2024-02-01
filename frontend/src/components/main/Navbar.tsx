@@ -1,10 +1,12 @@
+import { NavLink } from "react-router-dom";
+
 function Navbar() {
   return (
     <nav className="navbar navbar-light bg-light p-3">
       <div className="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
-        <a className="navbar-brand" href="#">
-          GoReact Dashboard
-        </a>
+        <NavLink className="navbar-brand" to="/user/dashboard">
+          Dashboard
+        </NavLink>
         <button
           className="button-toggler d-md-none collapsed mb-3"
           type="button"
@@ -25,20 +27,15 @@ function Navbar() {
         />
       </div>
       <div className="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end">
-        {/* <div className="mr-3 mt-1">
-        <a
-          target="_blank"
-          className="github-button"
-          href="https://github.com/developerdiwakar/go-react"
-          data-color-scheme="no-preference: dark; light: light; dark: light;"
-          data-icon="octicon-star"
-          data-size="large"
-          data-show-count="true"
-          aria-label="Star /developerdiwakar/go-react"
-        >
-          Star
-        </a>
-      </div> */}
+        <div className="mr-3 mt-1 m-2">
+          <NavLink
+            // target="_blank"
+            className=""
+            to="/login"
+          >
+            Login
+          </NavLink>
+        </div>
         <div className="dropdown">
           <button
             className="btn btn-secondary dropdown-toggle"
@@ -51,19 +48,19 @@ function Navbar() {
           </button>
           <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <li>
-              <a className="dropdown-item" href="#">
+              <NavLink className="dropdown-item" to="#">
                 Settings
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a className="dropdown-item" href="#">
+              <NavLink className="dropdown-item" to="#">
                 Messages
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a className="dropdown-item" href="#">
+              <NavLink className="dropdown-item" to="#">
                 Sign out
-              </a>
+              </NavLink>
             </li>
           </ul>
         </div>

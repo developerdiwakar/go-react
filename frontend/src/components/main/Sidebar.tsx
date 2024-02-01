@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Sidebar() {
   return (
     <nav
@@ -7,7 +9,11 @@ function Sidebar() {
       <div className="position-sticky pt-md-5">
         <ul className="nav flex-column">
           <li className="nav-item">
-            <a className="nav-link active" aria-current="page" href="#">
+            <Link
+              className="nav-link active"
+              aria-current="page"
+              to="/user/dashboard"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -24,10 +30,10 @@ function Sidebar() {
                 <polyline points="9 22 9 12 15 12 15 22"></polyline>
               </svg>
               <span className="ms-2">Dashboard</span>
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">
+            <Link className="nav-link" to="#">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -44,10 +50,10 @@ function Sidebar() {
                 <polyline points="13 2 13 9 20 9"></polyline>
               </svg>
               <span className="ms-2">Orders</span>
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">
+            <Link className="nav-link" to="#">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -65,10 +71,10 @@ function Sidebar() {
                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
               </svg>
               <span className="ms-2">Products</span>
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">
+            <Link className="nav-link" to="#">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -87,49 +93,7 @@ function Sidebar() {
                 <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
               </svg>
               <span className="ms-2">Customers</span>
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="feather feather-bar-chart-2"
-              >
-                <line x1="18" y1="20" x2="18" y2="10"></line>
-                <line x1="12" y1="20" x2="12" y2="4"></line>
-                <line x1="6" y1="20" x2="6" y2="14"></line>
-              </svg>
-              <span className="ms-2">Reports</span>
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="feather feather-layers"
-              >
-                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                <polyline points="2 17 12 22 22 17"></polyline>
-                <polyline points="2 12 12 17 22 12"></polyline>
-              </svg>
-              <span className="ms-2">Integrations</span>
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
