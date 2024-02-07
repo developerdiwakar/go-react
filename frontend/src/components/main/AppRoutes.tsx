@@ -4,9 +4,12 @@ import Home from "../pages/Home";
 import Register from "../auth/Register";
 import Login from "../auth/Login";
 import Dashboard from "../pages/Dashboard";
+import PageNotFound from "../pages/PageNotFound";
+import { getToken } from "../../utils/auth";
 export default function AppRoutes() {
   return (
     <Routes>
+      <Route path="*" element={<PageNotFound />} />
       <Route path="/" element={<Layout />}>
         <Route path="/" element={<Home />} />
         <Route
@@ -17,7 +20,12 @@ export default function AppRoutes() {
         />
         <Route
           path="login"
-          element={<Login breadcrumbs={[{ ahref: "#", atext: "Login" }]} />}
+          element={
+            <Login
+              isLoggedIn={Boolean(getToken())}
+              breadcrumbs={[{ ahref: "#", atext: "Login" }]}
+            />
+          }
         />
       </Route>
       <Route path="/user" element={<ProtectedLayout />}>

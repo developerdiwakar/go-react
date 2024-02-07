@@ -3,9 +3,10 @@ import "bootstrap/dist/css/bootstrap-utilities.min.css";
 import "./App.css";
 import Navbar from "./components/main/Navbar";
 import Sidebar from "./components/main/Sidebar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import AppRoutes from "./components/main/AppRoutes";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
+import { getToken } from "./utils/auth";
 
 interface Props {
   children?: ReactNode;
@@ -18,7 +19,7 @@ function App() {
 function PageLayout({ children }: Props) {
   return (
     <div className="contanier">
-      <Navbar />
+      <Navbar isLoggedIn={Boolean(getToken())} />
       <div className="container-fluid">
         <div className="row">{children}</div>
       </div>
@@ -34,6 +35,13 @@ export function Layout() {
 }
 
 export function ProtectedLayout() {
+  const history = useNavigate();
+  useEffect(() => {
+    // Redirect to Login if not logged in
+    if (!getToken()) {
+      return history("/login");
+    }
+  });
   return (
     <PageLayout>
       <Sidebar />
