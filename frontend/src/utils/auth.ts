@@ -1,17 +1,32 @@
-// Set session data for User including token
+import { jwtDecode } from 'jwt-decode'
+// Set auth data for User including
 export const setAuthToken = (token: string) => {
-    sessionStorage.setItem('auth-token', token);
+    localStorage.setItem('auth-token', token);
 }
 
-// Get auth token from session storage
+// Get auth token from Local storage
 export const getToken = ():string => {
-    const tokenStr = sessionStorage.getItem('auth-token')
+    const tokenStr = localStorage.getItem('auth-token')
     return !tokenStr ? "" : tokenStr
 }
 
 
-// Remove the token and user from the session
+// Remove the token and user from the Local storage
 export const removeAuthToken = () => {
-    sessionStorage.removeItem('auth-token');
+    localStorage.removeItem('auth-token');
 }
 
+// Check the token expiry time
+export const checkIsTokenExpired = ():boolean => {
+    // Extract the token
+    if(getToken() == ""){
+        return true
+    }
+    const decodedToken = jwtDecode(getToken()) as { [key: string]: any };
+    return decodedToken.exp < Date.now()/1000;
+}
+
+// Check if the user login session expired or not
+export const checkIsLoggedIn = () => {
+    return ! checkIsTokenExpired()
+}

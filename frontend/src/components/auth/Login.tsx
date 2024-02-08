@@ -46,7 +46,7 @@ export default function Login(props: LoginProps) {
         password: password.value,
       })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         // Login Sucess
         history("/user/dashboard");
         setLoading(false);

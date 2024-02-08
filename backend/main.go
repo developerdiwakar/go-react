@@ -26,18 +26,21 @@ func main() {
 	})
 
 	// Load the Database
-
 	db := database.Conn()
 	defer database.Close()
+
 	// Called Migrations
 	migrations.Migrate(db.DB)
+
 	// Called Middlewares
 	app.Use(cors.New())
+
 	// Load routes
 	routes.Load(app)
 
+	// Handled 404 "Not Found" url endpoint
 	app.Use(func(c *fiber.Ctx) error {
-		return c.SendStatus(404) // => 404 "Not Found"
+		return c.SendStatus(404)
 	})
 
 	// Start the app on port 8000

@@ -6,7 +6,7 @@ import Sidebar from "./components/main/Sidebar";
 import { Outlet, useNavigate } from "react-router-dom";
 import AppRoutes from "./components/main/AppRoutes";
 import { ReactNode, useEffect } from "react";
-import { getToken } from "./utils/auth";
+import { checkIsLoggedIn, removeAuthToken } from "./utils/auth";
 
 interface Props {
   children?: ReactNode;
@@ -19,7 +19,7 @@ function App() {
 function PageLayout({ children }: Props) {
   return (
     <div className="contanier">
-      <Navbar isLoggedIn={Boolean(getToken())} />
+      <Navbar isLoggedIn={checkIsLoggedIn()} />
       <div className="container-fluid">
         <div className="row">{children}</div>
       </div>
@@ -38,10 +38,10 @@ export function ProtectedLayout() {
   const history = useNavigate();
   useEffect(() => {
     // Redirect to Login if not logged in
-    if (!getToken()) {
+    if (!checkIsLoggedIn()) {
       return history("/login");
     }
-  });
+  }, []);
   return (
     <PageLayout>
       <Sidebar />

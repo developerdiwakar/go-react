@@ -3,6 +3,7 @@ package controllers
 import (
 	"gofiber-api/services/tokens"
 	"os"
+	"strconv"
 	"time"
 )
 
@@ -17,7 +18,8 @@ func CreateJwtToken(userId int) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	token, err := tokenMaker.CreateToken(int(userId), time.Minute*30)
+	expiryTime, _ := strconv.Atoi(os.Getenv("TOKEN_EXPIRY_TIME"))
+	token, err := tokenMaker.CreateToken(int(userId), time.Minute*time.Duration(expiryTime))
 	if err != nil {
 		return "", err
 	}

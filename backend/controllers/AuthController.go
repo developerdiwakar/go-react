@@ -51,7 +51,7 @@ func Register(c *fiber.Ctx) error {
 	}
 }
 
-// User Login with 
+// User Login with
 func Login(c *fiber.Ctx) error {
 	requestBody := &requests.UserLoginRequest{}
 	response := services.GetBaseResponseObject()
