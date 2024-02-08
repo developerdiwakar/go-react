@@ -6,7 +6,7 @@ import Sidebar from "./components/main/Sidebar";
 import { Outlet, useNavigate } from "react-router-dom";
 import AppRoutes from "./components/main/AppRoutes";
 import { ReactNode, useEffect } from "react";
-import { checkIsLoggedIn, removeAuthToken } from "./utils/auth";
+import { checkIsLoggedIn } from "./utils/auth";
 
 interface Props {
   children?: ReactNode;
@@ -41,7 +41,7 @@ export function ProtectedLayout() {
     if (!checkIsLoggedIn()) {
       return history("/login");
     }
-  }, []);
+  }, [null]);
   return (
     <PageLayout>
       <Sidebar />
