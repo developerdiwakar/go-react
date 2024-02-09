@@ -63,66 +63,64 @@ export default function Login(props: LoginProps) {
 
   //return the content
   return (
-    <>
-      <main className="col-12 col-md-12 col-lg-12 px-md-4 py-4">
-        <Breadcrumb breadcrumbs={props.breadcrumbs} />
-        <h1 className="h2">Login</h1>
-        <p>Login here to access the dashboad.</p>
+    <main className="col-12 col-md-12 col-lg-12 px-md-4 py-4">
+      <Breadcrumb breadcrumbs={props.breadcrumbs} />
+      <h1 className="h2">Login</h1>
+      <p>Login here to access the dashboad.</p>
 
-        <div className="row my-4">
-          <div className="col-12 col-md-8 col-lg-6 mb-4 mb-lg-0">
-            <form>
-              <div className="form-row">
-                <div className="col-sm-12 col-md-10 col-lg-6  mb-3">
-                  <label htmlFor="username">Username</label>
-                  <input
-                    type="text"
-                    className={"form-control " + (error ? "is-invalid" : "")}
-                    id="username"
-                    placeholder="Email or Mobile Number"
-                    autoComplete="new-password"
-                    {...username}
-                    required
-                  />
-                  {/* <div className="valid-feedback">Looks OK!</div> */}
-                </div>
-                <div className="col-sm-12 col-md-10 col-lg-6  mb-3">
-                  <label htmlFor="password">Password</label>
-                  <input
-                    type="text"
-                    className={"form-control " + (error ? "is-invalid" : "")}
-                    id="password"
-                    placeholder="Password"
-                    autoComplete="new-password"
-                    {...password}
-                    required
-                  />
-                  {/* <div className="valid-feedback"></div>
-                  <div className="invalid-feedback"></div> */}
-                </div>
+      <div className="row my-4">
+        <div className="col-12 col-md-8 col-lg-6 mb-4 mb-lg-0">
+          <form>
+            <div className="form-row">
+              <div className="col-sm-12 col-md-10 col-lg-6  mb-3">
+                <label htmlFor="username">Username</label>
+                <input
+                  type="text"
+                  className={"form-control " + (error ? "is-invalid" : "")}
+                  id="username"
+                  placeholder="Email or Mobile Number"
+                  autoComplete="new-password"
+                  {...username}
+                  required
+                />
+                {/* <div className="valid-feedback">Looks OK!</div> */}
               </div>
-              <button
-                className="btn btn-primary"
-                type="submit"
-                disabled={loading}
-                onClick={handleLogin}
-              >
-                {loading ? "logging in..." : "Login"}
-              </button>
+              <div className="col-sm-12 col-md-10 col-lg-6  mb-3">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="text"
+                  className={"form-control " + (error ? "is-invalid" : "")}
+                  id="password"
+                  placeholder="Password"
+                  autoComplete="new-password"
+                  {...password}
+                  required
+                />
+                {/* <div className="valid-feedback"></div>
+                  <div className="invalid-feedback"></div> */}
+              </div>
+            </div>
+            <button
+              className="btn btn-primary"
+              type="submit"
+              disabled={loading}
+              onClick={handleLogin}
+            >
+              {loading ? "logging in..." : "Login"}
+            </button>
 
-              {error ? (
-                <div className="invalid-feedback">{error}</div>
-              ) : (
-                <div className="valid-feedback">Login Successful!</div>
-              )}
-            </form>
-            <p className="mt-3">
-              Don't have an account?{" "}
-              <Link to="/register">Please register here</Link>
-            </p>
-          </div>
+            {error ? (
+              <div className="invalid-feedback">{error}</div>
+            ) : (
+              <div className="valid-feedback">Login Successful!</div>
+            )}
+          </form>
+          <p className="mt-3">
+            Don't have an account?{" "}
+            <Link to="/register">Please register here</Link>
+          </p>
         </div>
-      </main>
-    </>
+      </div>
+    </main>
   );
 }
