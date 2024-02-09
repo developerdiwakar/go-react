@@ -1,11 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Breadcrumb from "../main/Breadcrumb";
+import { useEffect } from "react";
 
-interface BreadCrumbs {
+type BreadCrumbs = {
   breadcrumbs: Array<any>;
-}
+  isLoggedIn: Boolean;
+};
 
 export default function Register(props: BreadCrumbs) {
+  const history = useNavigate();
+  useEffect(() => {
+    if (props.isLoggedIn) {
+      history("/user/dashboard");
+    }
+  });
   return (
     <main className="col-md-12 col-lg-12 px-md-4 py-4">
       <Breadcrumb breadcrumbs={props.breadcrumbs} />

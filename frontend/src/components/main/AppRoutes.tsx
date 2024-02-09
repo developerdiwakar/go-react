@@ -4,7 +4,7 @@ import Register from "../auth/Register";
 import Login from "../auth/Login";
 import Dashboard from "../pages/Dashboard";
 import PageNotFound from "../pages/PageNotFound";
-import { getToken } from "../../utils/auth";
+import { checkIsLoggedIn } from "../../utils/auth";
 import { UserLayout } from "../layouts/UserLayout";
 import PublicLayout from "../layouts/PublicLayout";
 
@@ -17,14 +17,17 @@ export default function AppRoutes() {
         <Route
           path="register"
           element={
-            <Register breadcrumbs={[{ ahref: "#", atext: "Register" }]} />
+            <Register
+              isLoggedIn={checkIsLoggedIn()}
+              breadcrumbs={[{ ahref: "#", atext: "Register" }]}
+            />
           }
         />
         <Route
           path="login"
           element={
             <Login
-              isLoggedIn={Boolean(getToken())}
+              isLoggedIn={checkIsLoggedIn()}
               breadcrumbs={[{ ahref: "#", atext: "Login" }]}
             />
           }
